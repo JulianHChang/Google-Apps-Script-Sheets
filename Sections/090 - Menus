@@ -1,0 +1,104 @@
+
+
+//   ll
+function createEmptyMenu() {
+    var menu = SpreadsheetApp.getUi().createMenu("⚙️ Admin Settings");
+    menu.addItem("Setting A", "settingA");
+    menu.addToUi();
+ }
+ 
+ function settingA() {
+   SpreadsheetApp.getActive().toast("You selected Setting A.");
+ }
+//   ll
+
+// 2222
+function createEmptyMenu() {
+    SpreadsheetApp.getUi().createMenu("⚙️ Admin Settings")
+      .addItem("Setting A", "settingA")
+      .addToUi();
+ }
+ 
+ function settingA() {
+   SpreadsheetApp.getActive().toast("You selected Setting A.");
+ }
+
+// 222
+
+
+
+
+
+function onOpen() {
+
+  SpreadsheetApp.getUi()
+    .createMenu('Text')
+    .addItem('Convert to uppercase', 'uppercase')
+    .addItem('Convert to lowercase', 'lowercase')
+    .addToUi();
+}
+
+
+function uppercase() {
+    const activeCell = SpreadsheetApp.getActiveSheet().getActiveCell();
+    activeCell.setValue(activeCell.getValue().toUpperCase());
+  }
+  
+  function lowercase() {
+    const activeCell = SpreadsheetApp.getActiveSheet().getActiveCell();
+    activeCell.setValue(activeCell.getValue().toLowerCase());
+  }
+
+
+  function uppercase() {
+
+    const activeRange = SpreadsheetApp.getActiveSheet().getActiveRange();
+  
+    activeRange.setValues(activeRange.getValues().map(line => line.map(value => value.toUpperCase())));
+  }
+  
+  function lowercase() {
+  
+    const activeRange = SpreadsheetApp.getActiveSheet().getActiveRange();
+  
+    activeRange.setValues(activeRange.getValues().map(line => line.map(value => value.toLowerCase())));
+  }
+
+
+
+  Adding a submenu
+  function onOpen() {
+
+    const ui = SpreadsheetApp.getUi();
+    
+    ui.createMenu('Text')
+      .addItem('Other', 'other')
+      .addSubMenu(ui.createMenu('Uppercase / Lowercase')
+        .addItem('Convert to uppercase', 'uppercase')
+        .addItem('Convert to lowercase', 'lowercase'))
+      .addItem('Various', 'various')
+      .addToUi();
+  }
+
+Adding a separator
+  function onOpen() {
+
+    SpreadsheetApp.getUi()
+      .createMenu('Text')
+      .addItem('Convert to uppercase', 'uppercase')
+      .addItem('Convert to lowercase', 'lowercase')
+      .addSeparator()
+      .addItem('Split into array', 'split')
+      .addItem('Join an array', 'join')
+      .addToUi();
+  }
+
+Adding an icon
+  function onOpen() {
+
+    SpreadsheetApp.getUi()
+      .createMenu('Text')
+      .addItem('🔺 Convert to uppercase', 'uppercase')
+      .addItem('🔻 Convert to lowercase', 'lowercase')
+      .addToUi();
+  }

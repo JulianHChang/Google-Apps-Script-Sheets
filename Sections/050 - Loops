@@ -1,8 +1,72 @@
 
 <h2>The For loop</h2>
+Different Ways to Loop
+
+Map() Method
+numbers.map( num => num );
+
+forEach() Method
+numbers.forEach( num => num );
+
+For…in Statement
+for (num in numbers) { 
+    num;
+}
+
+For…of Statement
+for (num of numbers) { 
+    num;
+}
+
+For Loop – Count Up
+for (var num = 0; num < numbers.length; num++) { 
+    numbers[num];
+}
+
+For Loop – Count Down
+for (var num = numbers.length; num >= 0 ; num--) { 
+    numbers[num];
+}
+
+For Loop – Count Up (length referenced)
+const length = numbers.length;
+for (var num = 0; num < length ; num++) { 
+    numbers[num];
+}
+
+For Loop – Count Down (length referenced)
+const length = numbers.length;
+for (var num = length; num >= 0 ; num--) { 
+    numbers[num];
+}
+
+While Loop – Count Up
+var num = 0;
+while (num < numbers.length) { 
+    numbers[num];
+    num+=1;
+}
+
+While Loop – Count Down
+var num = numbers.length;
+while (num > 0) { 
+    numbers[num];
+    num-=1;
+}
+
+While Loop – Count Up (length referenced)
+const length = numbers.length;
+var num = 0;
+while (num < length) { 
+    numbers[num];
+    num+=1;
+}
+
+for (initialization; condition; increment) {
+  // Code block to be executed
+}
 
 for (let i = 1; i <= 12; i++)
-
 
 function monthList() {
   const message = 'Month ';
@@ -11,6 +75,23 @@ function monthList() {
   }
 }
 
+function processObject() {
+  var person = {
+    name: "John Doe",
+    age: 30,
+    occupation: "Software Developer"
+  };
+  for (var property in person) {
+    Logger.log(property + ": " + person[property]);
+  }
+}
+
+function processArray() {
+  var fruits = ["apple", "banana", "cherry", "date"];
+  for (var i = 0; i < fruits.length; i++) {
+    Logger.log("Processing " + fruits[i]);
+  }
+}
 
 function monthList() {
     const message = 'Month ';
@@ -40,6 +121,27 @@ function loops() {
 
 
 <h2>The While loop</h2>
+function loops() {
+
+  const array = [];
+
+  while (array.length < 10) {
+    array.push(0);
+  }
+
+  console.log(array); // Displays: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+}
+
+function loops() {
+
+  const array = [];
+
+  do {
+    array.push(0);
+  } while (array.length < 10);
+
+  console.log(array); // Displays: [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+}
 
 function guess() {
     var numGuesses = 1;
@@ -54,3 +156,26 @@ function guess() {
 
     Logger.log(numGuesses);
   }
+
+
+function color55() {
+
+  const sheet = SpreadsheetApp.getActiveSheet();
+  const valuesArray = sheet.getDataRange().getValues(); // getDataRange = range of the sheet containing data
+
+  // Loop from column 1 to valuesArray[0].length (valuesArray[0] corresponds to the array of the first row)
+  for (let j = 0; j < valuesArray[0].length; j++) {
+
+    // Loop from row 1 to valuesArray.length
+    for (let i = 0; i < valuesArray.length; i++) {
+
+      // If the tested value of the array is 55
+      if (valuesArray[i][j] == 55) {
+        sheet.getRange(i + 1, j + 1).setBackground('#dce3f9');
+      }
+    }
+  }
+}
+
+
+<h2>The forEach loop</h2>
