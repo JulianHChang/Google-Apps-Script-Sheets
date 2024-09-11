@@ -1,0 +1,56 @@
+
+<h2>The For loop</h2>
+
+for (let i = 1; i <= 12; i++)
+
+
+function monthList() {
+  const message = 'Month ';
+  for (let i = 1; i <= 12; i++) {
+    console.log(message + i);
+  }
+}
+
+
+function monthList() {
+    const message = 'Month ';
+    for (let i = 1; i <= 12; i++) {
+        console.log(message + i);
+    
+        // Exit the loop after "Month 6"
+        if (i === 6) {
+        break;
+        }
+    }
+}
+
+
+function loops() {
+
+    const array = ['!', 'fun', 'are', 'loops'];
+  
+    for (let i = 3; i >= 0; i--) {
+      console.log(array[i]);
+    }
+  }
+
+  for (var counter = 0; counter <= 8; counter = counter + 1) {
+    Logger.log(names[counter]);
+  }
+
+
+<h2>The While loop</h2>
+
+function guess() {
+    var numGuesses = 1;
+    var guess = Math.floor(100 * Math.random());
+    
+    while (guess != 55) {
+      numGuesses = numGuesses + 1;
+      guess = Math.floor(100 * Math.random());
+    }
+    
+    // 
+
+    Logger.log(numGuesses);
+  }
