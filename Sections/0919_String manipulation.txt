@@ -1,0 +1,242 @@
+String manipulation in Google Apps Script, which is based on JavaScript, allows you to perform various operations on text data. This includes methods for searching, modifying, and formatting strings.
+
+Here's an exhaustive list of string manipulation techniques with examples:
+
+### 1. **Creating Strings**
+
+#### Example 1.1: Declaring Strings
+```javascript
+function createString() {
+  var str1 = "Hello, World!";
+  var str2 = 'Google Apps Script';
+  var str3 = `String with ${str2}`; // Template literals
+  
+  Logger.log(str1); // Logs: Hello, World!
+  Logger.log(str3); // Logs: String with Google Apps Script
+}
+```
+
+### 2. **String Length**
+
+#### Example 2.1: Getting the Length of a String
+```javascript
+function stringLength() {
+  var str = "Hello";
+  Logger.log(str.length); // Logs: 5
+}
+```
+
+### 3. **Accessing Characters**
+
+#### Example 3.1: Accessing Characters by Index
+```javascript
+function accessCharacters() {
+  var str = "Hello";
+  
+  Logger.log(str.charAt(0)); // Logs: H
+  Logger.log(str[1]);       // Logs: e
+}
+```
+
+### 4. **String Methods**
+
+#### Example 4.1: `toUpperCase()` and `toLowerCase()`
+```javascript
+function changeCase() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.toUpperCase()); // Logs: HELLO, WORLD!
+  Logger.log(str.toLowerCase()); // Logs: hello, world!
+}
+```
+
+#### Example 4.2: `concat()`
+```javascript
+function concatStrings() {
+  var str1 = "Hello";
+  var str2 = "World";
+  
+  Logger.log(str1.concat(", ", str2)); // Logs: Hello, World
+}
+```
+
+#### Example 4.3: `trim()`
+```javascript
+function trimString() {
+  var str = "   Hello, World!   ";
+  
+  Logger.log(str.trim()); // Logs: Hello, World!
+}
+```
+
+#### Example 4.4: `slice()`
+```javascript
+function sliceString() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.slice(0, 5));  // Logs: Hello
+  Logger.log(str.slice(-6));    // Logs: World!
+}
+```
+
+#### Example 4.5: `substring()`
+```javascript
+function substringExample() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.substring(0, 5)); // Logs: Hello
+  Logger.log(str.substring(7));    // Logs: World!
+}
+```
+
+#### Example 4.6: `substr()`
+```javascript
+function substrExample() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.substr(0, 5)); // Logs: Hello
+  Logger.log(str.substr(7, 5)); // Logs: World
+}
+```
+
+#### Example 4.7: `replace()`
+```javascript
+function replaceString() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.replace("World", "Apps Script")); // Logs: Hello, Apps Script!
+}
+```
+
+#### Example 4.8: `split()`
+```javascript
+function splitString() {
+  var str = "apple,banana,cherry";
+  
+  var arr = str.split(",");
+  Logger.log(arr); // Logs: [apple, banana, cherry]
+}
+```
+
+#### Example 4.9: `includes()`
+```javascript
+function includesExample() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.includes("World")); // Logs: true
+  Logger.log(str.includes("world")); // Logs: false (case-sensitive)
+}
+```
+
+#### Example 4.10: `indexOf()` and `lastIndexOf()`
+```javascript
+function indexOfExample() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.indexOf("World"));      // Logs: 7
+  Logger.log(str.lastIndexOf("o"));      // Logs: 8 (last occurrence of 'o')
+}
+```
+
+#### Example 4.11: `startsWith()` and `endsWith()`
+```javascript
+function startsAndEndsWith() {
+  var str = "Hello, World!";
+  
+  Logger.log(str.startsWith("Hello"));  // Logs: true
+  Logger.log(str.endsWith("World!"));   // Logs: true
+}
+```
+
+### 5. **Template Literals**
+
+#### Example 5.1: Using Template Literals for String Interpolation
+```javascript
+function templateLiterals() {
+  var name = "Alice";
+  var age = 30;
+  
+  var message = `Hello, ${name}. You are ${age} years old.`;
+  Logger.log(message); // Logs: Hello, Alice. You are 30 years old.
+}
+```
+
+### 6. **Regular Expressions**
+
+#### Example 6.1: Using Regular Expressions for Search and Replace
+```javascript
+function regexExample() {
+  var str = "The quick brown fox jumps over the lazy dog.";
+  
+  var pattern = /quick/;
+  Logger.log(pattern.test(str));  // Logs: true
+
+  Logger.log(str.replace(/quick/, "fast")); // Logs: The fast brown fox jumps over the lazy dog.
+}
+```
+
+### 7. **Escaping Special Characters**
+
+#### Example 7.1: Escaping Quotes and Backslashes
+```javascript
+function escapeCharacters() {
+  var str = "She said, \"Hello, World!\"";
+  var path = "C:\\Program Files\\App";
+  
+  Logger.log(str);  // Logs: She said, "Hello, World!"
+  Logger.log(path); // Logs: C:\Program Files\App
+}
+```
+
+### 8. **String Padding**
+
+#### Example 8.1: `padStart()` and `padEnd()`
+```javascript
+function paddingExample() {
+  var str = "5";
+  
+  Logger.log(str.padStart(3, "0")); // Logs: 005
+  Logger.log(str.padEnd(3, "0"));   // Logs: 500
+}
+```
+
+### 9. **String Conversion**
+
+#### Example 9.1: Converting Other Types to String
+```javascript
+function conversionExample() {
+  var num = 123;
+  var bool = true;
+  
+  Logger.log(String(num));  // Logs: "123"
+  Logger.log(String(bool)); // Logs: "true"
+}
+```
+
+### 10. **String Comparison**
+
+#### Example 10.1: Comparing Strings
+```javascript
+function stringComparison() {
+  var str1 = "Apple";
+  var str2 = "Banana";
+  
+  Logger.log(str1 > str2);  // Logs: false (compares based on Unicode values)
+  Logger.log(str1 < str2);  // Logs: true
+}
+```
+
+### Summary of String Manipulation in Apps Script:
+
+- **Creation**: Declare strings using quotes or template literals.
+- **Length**: Use `.length` to get the length of a string.
+- **Access Characters**: Use `.charAt(index)` or bracket notation.
+- **Methods**: `.toUpperCase()`, `.toLowerCase()`, `.concat()`, `.trim()`, `.slice()`, `.substring()`, `.substr()`, `.replace()`, `.split()`, `.includes()`, `.indexOf()`, `.lastIndexOf()`, `.startsWith()`, `.endsWith()`.
+- **Template Literals**: Use backticks for multi-line strings and interpolation.
+- **Regular Expressions**: Use regex for advanced search and replace.
+- **Escaping Characters**: Escape special characters with backslashes.
+- **Padding**: Use `.padStart()` and `.padEnd()` for padding strings.
+- **Conversion**: Convert other data types to strings using `String()`.
+- **Comparison**: Compare strings using relational operators.
+
+These examples should cover most common string manipulation needs in Google Apps Script.

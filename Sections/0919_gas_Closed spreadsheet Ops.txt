@@ -1,0 +1,108 @@
+Accessing a closed (or non-active) spreadsheet in Google Apps Script involves using its unique ID or URL. You cannot directly access or manipulate a spreadsheet that is not opened in the current script's context, but you can access it using the ID or URL.
+
+Here's how you can do it:
+
+### **Accessing a Closed Spreadsheet Using Its ID**
+
+1. **Get the Spreadsheet ID**: This is the unique identifier found in the URL of the spreadsheet. For example, in the URL `https://docs.google.com/spreadsheets/d/abc1234567890/edit`, the ID is `abc1234567890`.
+
+2. **Access the Spreadsheet**:
+   ```javascript
+   function accessClosedSpreadsheetById() {
+     var spreadsheetId = 'YOUR_SPREADSHEET_ID'; // Replace with your actual spreadsheet ID
+     var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+     
+     var sheet = spreadsheet.getSheetByName('Sheet1'); // Replace 'Sheet1' with the name of the sheet you want to access
+     var data = sheet.getRange('A1:B2').getValues(); // Adjust range as needed
+     
+     Logger.log('Data from closed spreadsheet:');
+     data.forEach(row => Logger.log(row));
+   }
+   ```
+
+### **Accessing a Closed Spreadsheet Using Its URL**
+
+1. **Get the Spreadsheet URL**: For example, `https://docs.google.com/spreadsheets/d/abc1234567890/edit`.
+
+2. **Access the Spreadsheet**:
+   ```javascript
+   function accessClosedSpreadsheetByUrl() {
+     var spreadsheetUrl = 'YOUR_SPREADSHEET_URL'; // Replace with your actual spreadsheet URL
+     var spreadsheet = SpreadsheetApp.openByUrl(spreadsheetUrl);
+     
+     var sheet = spreadsheet.getSheetByName('Sheet1'); // Replace 'Sheet1' with the name of the sheet you want to access
+     var data = sheet.getRange('A1:B2').getValues(); // Adjust range as needed
+     
+     Logger.log('Data from closed spreadsheet:');
+     data.forEach(row => Logger.log(row));
+   }
+   ```
+
+### **Common Operations with a Closed Spreadsheet**
+
+#### **1. Reading Data**
+
+```javascript
+function readDataFromClosedSpreadsheet() {
+  var spreadsheetId = 'YOUR_SPREADSHEET_ID';
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  var sheet = spreadsheet.getSheetByName('Sheet1');
+  
+  var range = sheet.getRange('A1:B10'); // Adjust range as needed
+  var values = range.getValues();
+  
+  Logger.log('Data from closed spreadsheet:');
+  values.forEach(row => Logger.log(row));
+}
+```
+
+#### **2. Writing Data**
+
+```javascript
+function writeDataToClosedSpreadsheet() {
+  var spreadsheetId = 'YOUR_SPREADSHEET_ID';
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  var sheet = spreadsheet.getSheetByName('Sheet1');
+  
+  var range = sheet.getRange('A1:B2'); // Adjust range as needed
+  var values = [
+    ['Header1', 'Header2'],
+    ['Value1', 'Value2']
+  ];
+  
+  range.setValues(values);
+}
+```
+
+#### **3. Appending Data**
+
+```javascript
+function appendDataToClosedSpreadsheet() {
+  var spreadsheetId = 'YOUR_SPREADSHEET_ID';
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  var sheet = spreadsheet.getSheetByName('Sheet1');
+  
+  var newRow = ['New Value1', 'New Value2'];
+  sheet.appendRow(newRow);
+}
+```
+
+#### **4. Deleting Data**
+
+```javascript
+function deleteDataFromClosedSpreadsheet() {
+  var spreadsheetId = 'YOUR_SPREADSHEET_ID';
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  var sheet = spreadsheet.getSheetByName('Sheet1');
+  
+  var range = sheet.getRange('A1:B2'); // Adjust range as needed
+  range.clearContent(); // Clears the content in the range
+}
+```
+
+### **Summary**
+
+- **Accessing Spreadsheet**: Use `SpreadsheetApp.openById(spreadsheetId)` or `SpreadsheetApp.openByUrl(spreadsheetUrl)` to access a closed spreadsheet.
+- **Common Operations**: Reading, writing, appending, and deleting data from ranges can be performed on the accessed spreadsheet.
+
+Replace `YOUR_SPREADSHEET_ID` or `YOUR_SPREADSHEET_URL` with the actual ID or URL of the spreadsheet you wish to access. Adjust ranges and sheet names as needed for your specific use case.

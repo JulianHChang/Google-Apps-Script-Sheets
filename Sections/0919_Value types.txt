@@ -1,0 +1,270 @@
+In Google Apps Script, value types refer to the types of data that variables can hold. These types are essential for managing and manipulating data in scripts. Like JavaScript, Apps Script supports the following value types:
+
+### 1. **Primitive Types** (Basic Data Types)
+   - **Number**
+   - **String**
+   - **Boolean**
+   - **Null**
+   - **Undefined**
+   - **Symbol** (rarely used in Apps Script)
+
+### 2. **Complex Types**
+   - **Object**
+   - **Array**
+   - **Function**
+
+### 1. **Number**
+Represents both integers and floating-point numbers.
+
+#### Example 1.1: Using Number Type
+```javascript
+function numberExample() {
+  var age = 30;              // Integer
+  var price = 19.99;          // Floating-point number
+  
+  Logger.log(age);            // Logs: 30
+  Logger.log(price);          // Logs: 19.99
+}
+```
+
+#### Operations with Numbers
+Numbers in Apps Script support mathematical operations like addition, subtraction, multiplication, and division.
+
+```javascript
+function numberOperationsExample() {
+  var a = 10;
+  var b = 20;
+  
+  Logger.log(a + b);          // Logs: 30
+  Logger.log(a * b);          // Logs: 200
+  Logger.log(b / a);          // Logs: 2
+}
+```
+
+---
+
+### 2. **String**
+A sequence of characters enclosed in either single (`'`) or double (`"`) quotes. Strings are used for representing text.
+
+#### Example 2.1: Using String Type
+```javascript
+function stringExample() {
+  var name = "John";
+  var greeting = 'Hello, ' + name + '!';  // String concatenation
+  
+  Logger.log(greeting);  // Logs: Hello, John!
+}
+```
+
+#### Common String Methods
+You can manipulate strings with various methods such as `.toUpperCase()`, `.toLowerCase()`, and `.substring()`.
+
+```javascript
+function stringMethodsExample() {
+  var str = "Google Apps Script";
+  
+  Logger.log(str.toUpperCase());   // Logs: GOOGLE APPS SCRIPT
+  Logger.log(str.toLowerCase());   // Logs: google apps script
+  Logger.log(str.substring(7, 11)); // Logs: Apps
+}
+```
+
+---
+
+### 3. **Boolean**
+Represents logical values `true` or `false`. These are commonly used for control flow and conditional statements.
+
+#### Example 3.1: Using Boolean Type
+```javascript
+function booleanExample() {
+  var isAdult = true;
+  var isStudent = false;
+  
+  Logger.log(isAdult);   // Logs: true
+  Logger.log(isStudent); // Logs: false
+}
+```
+
+#### Boolean in Conditional Statements
+Booleans are frequently used in `if-else` statements to control the logic of your script.
+
+```javascript
+function booleanConditionalExample() {
+  var isAdmin = true;
+  
+  if (isAdmin) {
+    Logger.log("Access granted");
+  } else {
+    Logger.log("Access denied");
+  }
+}
+```
+
+---
+
+### 4. **Null**
+`null` represents the intentional absence of any object value. It’s used when you want to explicitly set a variable to have no value.
+
+#### Example 4.1: Using Null Type
+```javascript
+function nullExample() {
+  var data = null;
+  
+  if (data === null) {
+    Logger.log("No data available");  // Logs this message
+  }
+}
+```
+
+---
+
+### 5. **Undefined**
+A variable that has been declared but has not yet been assigned a value is `undefined`.
+
+#### Example 5.1: Using Undefined Type
+```javascript
+function undefinedExample() {
+  var notAssigned;
+  
+  if (typeof notAssigned === 'undefined') {
+    Logger.log("Variable is undefined");  // Logs this message
+  }
+}
+```
+
+---
+
+### 6. **Object**
+An object is a collection of key-value pairs. Objects can store various types of data and provide methods to manipulate them.
+
+#### Example 6.1: Using Object Type
+```javascript
+function objectExample() {
+  var person = {
+    name: "Alice",
+    age: 25,
+    city: "San Francisco"
+  };
+  
+  Logger.log(person.name);  // Logs: Alice
+  Logger.log(person.age);   // Logs: 25
+}
+```
+
+#### Example 6.2: Adding and Modifying Object Properties
+```javascript
+function modifyObjectExample() {
+  var person = {
+    name: "Alice",
+    age: 25
+  };
+  
+  person.age = 30;  // Modify existing property
+  person.city = "New York";  // Add new property
+  
+  Logger.log(person.age);    // Logs: 30
+  Logger.log(person.city);   // Logs: New York
+}
+```
+
+---
+
+### 7. **Array**
+Arrays are ordered collections of data, where each item has an index. Arrays can contain values of different types, including other arrays and objects.
+
+#### Example 7.1: Using Array Type
+```javascript
+function arrayExample() {
+  var fruits = ["Apple", "Banana", "Cherry"];
+  
+  Logger.log(fruits[0]);  // Logs: Apple
+  Logger.log(fruits.length);  // Logs: 3 (number of elements in the array)
+}
+```
+
+#### Array Methods
+You can manipulate arrays with methods like `.push()`, `.pop()`, `.shift()`, `.unshift()`, `.forEach()`, etc.
+
+```javascript
+function arrayMethodsExample() {
+  var fruits = ["Apple", "Banana"];
+  
+  fruits.push("Cherry");  // Add an item at the end
+  Logger.log(fruits);     // Logs: ["Apple", "Banana", "Cherry"]
+  
+  fruits.pop();  // Remove the last item
+  Logger.log(fruits);  // Logs: ["Apple", "Banana"]
+}
+```
+
+---
+
+### 8. **Function**
+Functions are blocks of code designed to perform a particular task. They can accept parameters and return values.
+
+#### Example 8.1: Function Definition and Call
+```javascript
+function greet(name) {
+  return "Hello, " + name;
+}
+
+function functionExample() {
+  var message = greet("Alice");
+  Logger.log(message);  // Logs: Hello, Alice
+}
+```
+
+---
+
+### 9. **Symbol**
+Though `Symbol` is a primitive value type in JavaScript, it’s rarely used in Apps Script. Symbols are unique and immutable, often used as keys for object properties to avoid name collisions.
+
+#### Example 9.1: Using Symbol (Rare in Apps Script)
+```javascript
+function symbolExample() {
+  var sym = Symbol("description");
+  Logger.log(sym.toString());  // Logs: Symbol(description)
+}
+```
+
+---
+
+### Example: Working with Multiple Value Types
+
+In real-world Apps Script projects, you often work with multiple value types in combination. Here’s an example that uses several types together.
+
+```javascript
+function multipleValueTypesExample() {
+  var name = "John";           // String
+  var age = 28;                // Number
+  var isEmployed = true;       // Boolean
+  var address = {              // Object
+    city: "Los Angeles",
+    zip: "90001"
+  };
+  var skills = ["Java", "Apps Script", "SQL"];  // Array
+  
+  // Logging different value types
+  Logger.log("Name: " + name);
+  Logger.log("Age: " + age);
+  Logger.log("Employed: " + isEmployed);
+  Logger.log("City: " + address.city);
+  Logger.log("Skills: " + skills.join(", "));   // Join array into a string
+}
+```
+
+### Summary of Value Types in Apps Script:
+- **Primitive Types**:
+  - **Number**: Holds numeric values (integers, floats).
+  - **String**: Holds text data.
+  - **Boolean**: Holds `true` or `false`.
+  - **Null**: Represents a null or "empty" value.
+  - **Undefined**: Represents an uninitialized value.
+  - **Symbol**: Rarely used in Apps Script, represents a unique identifier.
+
+- **Complex Types**:
+  - **Object**: Holds key-value pairs (like a dictionary).
+  - **Array**: Ordered collection of elements.
+  - **Function**: Block of code designed to perform a task, which can be invoked.
+
+Understanding and using these value types is fundamental to writing effective scripts in Google Apps Script.

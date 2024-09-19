@@ -1,0 +1,284 @@
+In Google Apps Script, conditional logic is used to control the flow of code execution based on conditions. 
+The most common ways to implement conditional logic are through `if`, `else if`, `else`, `switch`, and ternary operators.
+
+Below is an exhaustive list of examples demonstrating different types of conditional logic in Apps Script:
+
+### 1. **Basic `if` Statement**
+Executes the code block if the condition evaluates to `true`.
+
+```javascript
+function checkValue() {
+  var value = 5;
+  
+  if (value > 3) {
+    Logger.log("Value is greater than 3");
+  }
+}
+```
+
+### 2. **`if-else` Statement**
+Executes the `if` block if the condition is true; otherwise, executes the `else` block.
+
+```javascript
+function checkIfElse() {
+  var value = 2;
+  
+  if (value > 3) {
+    Logger.log("Value is greater than 3");
+  } else {
+    Logger.log("Value is less than or equal to 3");
+  }
+}
+```
+
+### 3. **`if-else if-else` Ladder**
+You can chain multiple conditions using `else if`.
+
+```javascript
+function checkMultipleConditions() {
+  var value = 5;
+  
+  if (value > 7) {
+    Logger.log("Value is greater than 7");
+  } else if (value > 5) {
+    Logger.log("Value is greater than 5 but less than or equal to 7");
+  } else if (value > 3) {
+    Logger.log("Value is greater than 3 but less than or equal to 5");
+  } else {
+    Logger.log("Value is less than or equal to 3");
+  }
+}
+```
+
+### 4. **Nested `if-else` Statements**
+`if` statements can be nested within one another.
+
+```javascript
+function checkNestedConditions() {
+  var value = 6;
+  
+  if (value > 5) {
+    if (value < 10) {
+      Logger.log("Value is between 5 and 10");
+    }
+  } else {
+    Logger.log("Value is 5 or less");
+  }
+}
+```
+
+### 5. **Using Logical Operators in `if` Statements**
+You can combine conditions using logical operators such as `&&` (AND) and `||` (OR).
+
+#### AND (`&&`) Operator
+```javascript
+function checkAndCondition() {
+  var value = 8;
+  
+  if (value > 5 && value < 10) {
+    Logger.log("Value is between 5 and 10");
+  }
+}
+```
+
+#### OR (`||`) Operator
+```javascript
+function checkOrCondition() {
+  var value = 3;
+  
+  if (value < 2 || value > 5) {
+    Logger.log("Value is either less than 2 or greater than 5");
+  }
+}
+```
+
+### 6. **Using `switch` Statement**
+A `switch` statement is useful when you have multiple cases based on a single variable.
+
+```javascript
+function checkSwitchCase() {
+  var day = 3;
+  
+  switch (day) {
+    case 1:
+      Logger.log("Monday");
+      break;
+    case 2:
+      Logger.log("Tuesday");
+      break;
+    case 3:
+      Logger.log("Wednesday");
+      break;
+    default:
+      Logger.log("Unknown day");
+  }
+}
+```
+
+### 7. **Using Ternary Operator**
+A ternary operator is a shorthand for an `if-else` statement.
+
+```javascript
+function checkTernary() {
+  var value = 5;
+  var result = (value > 3) ? "Value is greater than 3" : "Value is less than or equal to 3";
+  Logger.log(result);
+}
+```
+
+### 8. **Using `continue` and `break` in Loops with Conditional Logic**
+You can use `continue` to skip the rest of the loop iteration and `break` to exit the loop early.
+
+#### Using `break`
+```javascript
+function checkBreakInLoop() {
+  for (var i = 1; i <= 10; i++) {
+    if (i === 5) {
+      Logger.log("Breaking at 5");
+      break;  // Exits the loop when i equals 5
+    }
+    Logger.log(i);
+  }
+}
+```
+
+#### Using `continue`
+```javascript
+function checkContinueInLoop() {
+  for (var i = 1; i <= 10; i++) {
+    if (i === 5) {
+      Logger.log("Skipping 5");
+      continue;  // Skips the iteration when i equals 5
+    }
+    Logger.log(i);
+  }
+}
+```
+
+### 9. **Conditional Logic Based on Spreadsheet Values**
+You can apply conditional logic based on values in Google Sheets.
+
+```javascript
+function checkSpreadsheetValue() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var value = sheet.getRange('A1').getValue();
+  
+  if (value === "Approved") {
+    Logger.log("Status is Approved");
+  } else if (value === "Pending") {
+    Logger.log("Status is Pending");
+  } else {
+    Logger.log("Unknown status");
+  }
+}
+```
+
+### 10. **Conditional Logic Based on Range Values**
+You can iterate over a range of values and apply conditional logic to each value.
+
+```javascript
+function checkRangeValues() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:A10');
+  var values = range.getValues();
+  
+  for (var i = 0; i < values.length; i++) {
+    if (values[i][0] > 5) {
+      Logger.log("Value in row " + (i + 1) + " is greater than 5");
+    } else {
+      Logger.log("Value in row " + (i + 1) + " is less than or equal to 5");
+    }
+  }
+}
+```
+
+### 11. **Conditional Logic Using Regular Expressions**
+You can use regular expressions to match patterns in strings.
+
+```javascript
+function checkWithRegExp() {
+  var email = "example@gmail.com";
+  
+  if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    Logger.log("Valid email address");
+  } else {
+    Logger.log("Invalid email address");
+  }
+}
+```
+
+### 12. **Switch Case with String Values**
+You can use a switch statement with string values as well.
+
+```javascript
+function checkStringSwitch() {
+  var status = "Approved";
+  
+  switch (status) {
+    case "Approved":
+      Logger.log("Status is Approved");
+      break;
+    case "Pending":
+      Logger.log("Status is Pending");
+      break;
+    default:
+      Logger.log("Unknown status");
+  }
+}
+```
+
+### 13. **Complex Conditional Logic in Functions**
+You can use complex conditional logic with multiple operators and expressions.
+
+```javascript
+function complexConditionalLogic() {
+  var score = 85;
+  var attendance = 90;
+  
+  if (score > 80 && attendance > 85) {
+    Logger.log("The student is eligible for a certificate");
+  } else if (score > 80 || attendance > 85) {
+    Logger.log("The student might be eligible under review");
+  } else {
+    Logger.log("The student is not eligible for a certificate");
+  }
+}
+```
+
+### 14. **Conditional Logic with Date Objects**
+You can work with date objects in conditional logic.
+
+```javascript
+function checkDateCondition() {
+  var today = new Date();
+  var someDate = new Date('2024-12-31');
+  
+  if (today < someDate) {
+    Logger.log("Today's date is before December 31, 2024");
+  } else {
+    Logger.log("Today's date is after or on December 31, 2024");
+  }
+}
+```
+
+### 15. **Short-Circuit Evaluation in Logical Conditions**
+You can utilize short-circuit evaluation, where the second part of the condition is only evaluated if necessary.
+
+```javascript
+function shortCircuitEvaluation() {
+  var value = 5;
+  
+  if (value > 0 && performSomeAction()) {
+    Logger.log("Action performed since value is greater than 0");
+  }
+}
+
+function performSomeAction() {
+  Logger.log("Performing action...");
+  return true;
+}
+```
+
+---
+
+These examples show how to use conditional logic in Google Apps Script for a variety of scenarios—from basic `if` statements to more complex conditions involving regular expressions, loops, and date objects. You can adapt these concepts to suit any specific requirements in your project.

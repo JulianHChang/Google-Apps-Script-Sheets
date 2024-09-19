@@ -1,0 +1,275 @@
+Referencing a spreadsheet in Google Apps Script involves accessing various elements like the entire spreadsheet, individual sheets, ranges, cells, and other properties. Here’s an exhaustive guide with examples to help you understand how to work with spreadsheets in Apps Script.
+
+### **1. Accessing a Spreadsheet**
+
+#### Example 1.1: Access the Active Spreadsheet
+```javascript
+function getActiveSpreadsheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(spreadsheet.getName()); // Logs the name of the active spreadsheet
+}
+```
+
+#### Example 1.2: Access a Spreadsheet by ID
+```javascript
+function getSpreadsheetById() {
+  var spreadsheetId = 'YOUR_SPREADSHEET_ID'; // Replace with your spreadsheet ID
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  Logger.log(spreadsheet.getName()); // Logs the name of the spreadsheet
+}
+```
+
+#### Example 1.3: Access a Spreadsheet by URL
+```javascript
+function getSpreadsheetByUrl() {
+  var spreadsheetUrl = 'YOUR_SPREADSHEET_URL'; // Replace with your spreadsheet URL
+  var spreadsheet = SpreadsheetApp.openByUrl(spreadsheetUrl);
+  Logger.log(spreadsheet.getName()); // Logs the name of the spreadsheet
+}
+```
+
+### **2. Accessing Sheets within a Spreadsheet**
+
+#### Example 2.1: Access a Sheet by Name
+```javascript
+function getSheetByName() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName('Sheet1'); // Replace 'Sheet1' with your sheet name
+  Logger.log(sheet.getName()); // Logs the name of the sheet
+}
+```
+
+#### Example 2.2: Access a Sheet by Index
+```javascript
+function getSheetByIndex() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheets()[0]; // Accesses the first sheet
+  Logger.log(sheet.getName()); // Logs the name of the sheet
+}
+```
+
+### **3. Creating and Deleting Sheets**
+
+#### Example 3.1: Create a New Sheet
+```javascript
+function createSheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var newSheet = spreadsheet.insertSheet('NewSheet'); // Creates a new sheet named 'NewSheet'
+  Logger.log(newSheet.getName()); // Logs: NewSheet
+}
+```
+
+#### Example 3.2: Delete a Sheet
+```javascript
+function deleteSheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName('SheetToDelete'); // Replace with the name of the sheet to delete
+  if (sheet) {
+    spreadsheet.deleteSheet(sheet);
+    Logger.log('Sheet deleted: ' + sheet.getName());
+  } else {
+    Logger.log('Sheet not found');
+  }
+}
+```
+
+### **4. Renaming Sheets**
+
+#### Example 4.1: Rename a Sheet
+```javascript
+function renameSheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName('OldName'); // Replace with the current name of the sheet
+  if (sheet) {
+    sheet.setName('NewName'); // Rename the sheet to 'NewName'
+    Logger.log('Sheet renamed to: ' + sheet.getName());
+  } else {
+    Logger.log('Sheet not found');
+  }
+}
+```
+
+### **5. Accessing and Modifying Ranges**
+
+#### Example 5.1: Get a Range
+```javascript
+function getRange() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B2'); // Get range A1:B2
+  Logger.log(range.getA1Notation()); // Logs: A1:B2
+}
+```
+
+#### Example 5.2: Set Values in a Range
+```javascript
+function setValuesInRange() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B2');
+  var values = [
+    ['Name', 'Age'],
+    ['Alice', 30],
+    ['Bob', 25]
+  ];
+  range.setValues(values);
+}
+```
+
+#### Example 5.3: Get Values from a Range
+```javascript
+function getValuesFromRange() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B2');
+  var values = range.getValues();
+  Logger.log(values);
+}
+```
+
+### **6. Working with Named Ranges**
+
+#### Example 6.1: Define a Named Range
+```javascript
+function defineNamedRange() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B2');
+  var namedRange = SpreadsheetApp.getActiveSpreadsheet().setNamedRange('MyNamedRange', range);
+  Logger.log('Named Range created: ' + namedRange.getName());
+}
+```
+
+#### Example 6.2: Access a Named Range
+```javascript
+function getNamedRange() {
+  var namedRange = SpreadsheetApp.getActiveSpreadsheet().getRangeByName('MyNamedRange');
+  Logger.log(namedRange.getA1Notation()); // Logs the A1 notation of the named range
+}
+```
+
+#### Example 6.3: Delete a Named Range
+```javascript
+function deleteNamedRange() {
+  var namedRange = SpreadsheetApp.getActiveSpreadsheet().getRangeByName('MyNamedRange');
+  if (namedRange) {
+    SpreadsheetApp.getActiveSpreadsheet().removeNamedRange('MyNamedRange');
+    Logger.log('Named Range deleted');
+  } else {
+    Logger.log('Named Range not found');
+  }
+}
+```
+
+### **7. Accessing Spreadsheet Properties**
+
+#### Example 7.1: Get Spreadsheet Properties
+```javascript
+function getSpreadsheetProperties() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log('Title: ' + spreadsheet.getName());
+  Logger.log('URL: ' + spreadsheet.getUrl());
+  Logger.log('ID: ' + spreadsheet.getId());
+}
+```
+
+#### Example 7.2: Set Spreadsheet Properties (Custom Properties)
+```javascript
+function setSpreadsheetProperties() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  PropertiesService.getDocumentProperties().setProperty('CustomProperty', 'Value');
+}
+```
+
+### **8. Sharing and Permissions**
+
+#### Example 8.1: Share Spreadsheet with Specific User
+```javascript
+function shareSpreadsheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var emailAddress = 'example@example.com'; // Replace with the user's email address
+  spreadsheet.addEditor(emailAddress);
+  Logger.log('Spreadsheet shared with: ' + emailAddress);
+}
+```
+
+#### Example 8.2: Remove User Access
+```javascript
+function removeUserAccess() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var emailAddress = 'example@example.com'; // Replace with the user's email address
+  spreadsheet.removeEditor(emailAddress);
+  Logger.log('Access removed for: ' + emailAddress);
+}
+```
+
+### **9. Protecting Sheets and Ranges**
+
+#### Example 9.1: Protect a Sheet
+```javascript
+function protectSheet() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var protection = sheet.protect().setDescription('Protected Sheet');
+  Logger.log('Sheet protected: ' + protection.getDescription());
+}
+```
+
+#### Example 9.2: Unprotect a Sheet
+```javascript
+function unprotectSheet() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var protection = sheet.getProtections(SpreadsheetApp.ProtectionType.SHEET)[0];
+  if (protection) {
+    protection.remove();
+    Logger.log('Sheet unprotected');
+  } else {
+    Logger.log('No protection found');
+  }
+}
+```
+
+### **10. Custom Functions and Scripts**
+
+#### Example 10.1: Custom Function to Sum a Range
+```javascript
+function customSum(range) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var values = sheet.getRange(range).getValues();
+  var sum = values.flat().reduce((acc, val) => acc + val, 0);
+  Logger.log('Sum: ' + sum);
+}
+```
+
+### **Summary of Spreadsheet Referencing**
+
+- **Accessing Spreadsheet**:
+  - `SpreadsheetApp.getActiveSpreadsheet()`
+  - `SpreadsheetApp.openById(id)`
+  - `SpreadsheetApp.openByUrl(url)`
+
+- **Accessing Sheets**:
+  - `spreadsheet.getSheetByName(name)`
+  - `spreadsheet.getSheets()[index]`
+
+- **Creating/Deleting/Renaming Sheets**:
+  - `spreadsheet.insertSheet(name)`
+  - `spreadsheet.deleteSheet(sheet)`
+  - `sheet.setName(newName)`
+
+- **Working with Ranges**:
+  - `sheet.getRange('A1')`
+  - `sheet.getRange('A1:B2').setValues(values)`
+  - `sheet.getRange('A1:B2').getValues()`
+
+- **Named Ranges**:
+  - `SpreadsheetApp.getActiveSpreadsheet().setNamedRange(name, range)`
+  - `SpreadsheetApp.getActiveSpreadsheet().getRangeByName(name)`
+  - `SpreadsheetApp.getActiveSpreadsheet().removeNamedRange(name)`
+
+- **Spreadsheet Properties**:
+  - `spreadsheet.getName()`
+  - `spreadsheet.getUrl()`
+  - `spreadsheet.getId()`
+
+- **Sharing/Permissions**:
+  - `spreadsheet.addEditor(email)`
+  - `spreadsheet.removeEditor(email)`
+
+- **Protection**:
+  - `sheet

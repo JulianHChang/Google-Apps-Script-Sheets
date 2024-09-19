@@ -1,0 +1,181 @@
+In Google Apps Script, variables and constants are fundamental to storing and manipulating data. They can be declared and assigned in various ways, and understanding their scopes is crucial for effective scripting.
+
+### 1. **Variables**
+
+#### Declaration and Assignment
+
+Variables in Apps Script are declared using `var`, `let`, or `const` and can be assigned values of various types.
+
+- **`var`**: Used for variable declarations in older code. It has function scope and can lead to some issues with variable shadowing.
+- **`let`**: Introduced in ES6 (ECMAScript 2015). It has block scope and is generally preferred over `var` for its clearer scoping rules.
+- **`const`**: Also introduced in ES6. It is used to declare constants (unchangeable variables) and has block scope.
+
+#### Example 1.1: Using `var`
+```javascript
+function varExample() {
+  var name = "John";
+  var age = 30;
+
+  Logger.log(name);  // Logs: John
+  Logger.log(age);   // Logs: 30
+
+  if (true) {
+    var name = "Alice";  // This reassigns the outer 'name'
+    Logger.log(name);  // Logs: Alice
+  }
+
+  Logger.log(name);  // Logs: Alice (due to var's function scope)
+}
+```
+
+#### Example 1.2: Using `let`
+```javascript
+function letExample() {
+  let name = "John";
+  let age = 30;
+
+  Logger.log(name);  // Logs: John
+  Logger.log(age);   // Logs: 30
+
+  if (true) {
+    let name = "Alice";  // This creates a new 'name' in this block scope
+    Logger.log(name);  // Logs: Alice
+  }
+
+  Logger.log(name);  // Logs: John (outer 'name' is unchanged)
+}
+```
+
+#### Example 1.3: Using `const`
+```javascript
+function constExample() {
+  const pi = 3.14;
+  
+  Logger.log(pi);  // Logs: 3.14
+  
+  // pi = 3.14159;  // This will throw an error because 'const' variables cannot be reassigned
+  
+  // const arr = [1, 2, 3];
+  // arr.push(4);  // This is allowed. 'const' prevents reassignment but not modification of the object's contents.
+}
+```
+
+### 2. **Scope of Variables**
+
+- **Global Scope**: Variables declared outside any function are global and accessible from anywhere in the script.
+
+  ```javascript
+  var globalVar = "I'm global";
+  
+  function globalScopeExample() {
+    Logger.log(globalVar);  // Logs: I'm global
+  }
+  ```
+
+- **Function Scope**: Variables declared inside a function are only accessible within that function when using `var`.
+
+  ```javascript
+  function functionScopeExample() {
+    var localVar = "I'm local";
+    Logger.log(localVar);  // Logs: I'm local
+  }
+
+  // Logger.log(localVar);  // This will throw an error because 'localVar' is not accessible outside the function
+  ```
+
+- **Block Scope**: Variables declared with `let` and `const` are limited to the block (e.g., within curly braces `{}`) where they are defined.
+
+  ```javascript
+  function blockScopeExample() {
+    if (true) {
+      let blockVar = "I'm block scoped";
+      Logger.log(blockVar);  // Logs: I'm block scoped
+    }
+
+    // Logger.log(blockVar);  // This will throw an error because 'blockVar' is not accessible outside the block
+  }
+  ```
+
+### 3. **Constants**
+
+Constants are variables whose values cannot be changed once assigned. They are declared using `const`.
+
+#### Example 3.1: Declaring Constants
+```javascript
+function constantsExample() {
+  const PI = 3.14159;
+  
+  Logger.log(PI);  // Logs: 3.14159
+  
+  // PI = 3.14;  // This will throw an error because 'PI' is a constant and cannot be reassigned
+}
+```
+
+#### Example 3.2: Constant Arrays and Objects
+While you cannot reassign a constant, you can modify the contents of objects or arrays declared with `const`.
+
+```javascript
+function constantArrayExample() {
+  const numbers = [1, 2, 3];
+  
+  numbers.push(4);   // This is allowed
+  Logger.log(numbers);  // Logs: [1, 2, 3, 4]
+
+  // numbers = [5, 6, 7];  // This will throw an error
+}
+```
+
+```javascript
+function constantObjectExample() {
+  const person = { name: "Alice", age: 25 };
+  
+  person.age = 26;   // This is allowed
+  Logger.log(person.age);  // Logs: 26
+
+  // person = { name: "Bob", age: 30 };  // This will throw an error
+}
+```
+
+### 4. **Examples Combining Variables, Constants, and Scopes**
+
+#### Example 4.1: Combining Different Scopes
+```javascript
+var globalVar = "Global";
+
+function combinedScopesExample() {
+  let localLet = "Local Let";
+  const localConst = "Local Const";
+  
+  if (true) {
+    var functionVar = "Function Scope";
+    let blockLet = "Block Scope Let";
+    const blockConst = "Block Scope Const";
+    
+    Logger.log(globalVar);  // Logs: Global
+    Logger.log(localLet);   // Logs: Local Let
+    Logger.log(localConst); // Logs: Local Const
+    Logger.log(functionVar); // Logs: Function Scope
+    Logger.log(blockLet);   // Logs: Block Scope Let
+    Logger.log(blockConst); // Logs: Block Scope Const
+  }
+  
+  Logger.log(functionVar); // Logs: Function Scope
+  
+  // Logger.log(blockLet);  // This will throw an error because 'blockLet' is block scoped
+  // Logger.log(blockConst); // This will throw an error because 'blockConst' is block scoped
+}
+
+combinedScopesExample();
+```
+
+### Summary of Variables and Constants in Apps Script
+
+- **Variables**:
+  - **Declared with `var`**: Function scope, can be re-assigned.
+  - **Declared with `let`**: Block scope, can be re-assigned.
+  - **Declared with `const`**: Block scope, cannot be re-assigned.
+
+- **Constants**:
+  - **Declared with `const`**: Value cannot be changed, but object properties and array elements can still be modified.
+
+Understanding these concepts and their scopes will help you manage and manipulate data effectively in your Google Apps Script projects.

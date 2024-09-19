@@ -1,0 +1,194 @@
+
+Referencing a sheet using Google Apps Script involves working with the `SpreadsheetApp` service.
+
+### 1. **Reference the Active Sheet**
+This references the currently active sheet in the active spreadsheet.
+
+```javascript
+function getActiveSheet() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  Logger.log(sheet.getName());  // Logs the active sheet's name
+}
+```
+
+### 2. **Reference a Sheet by Name**
+You can reference a specific sheet by its name.
+
+```javascript
+function getSheetByName() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  Logger.log(sheet.getName());  // Logs 'Sheet1'
+}
+```
+
+### 3. **Reference a Sheet by Index**
+Sheets in a spreadsheet can be referenced by their index (0-based).
+
+```javascript
+function getSheetByIndex() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];  // First sheet
+  Logger.log(sheet.getName());  // Logs the name of the first sheet
+}
+```
+
+### 4. **Reference All Sheets**
+You can loop through all sheets in a spreadsheet and perform operations on each.
+
+```javascript
+function getAllSheets() {
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  for (var i = 0; i < sheets.length; i++) {
+    Logger.log(sheets[i].getName());  // Logs the name of each sheet
+  }
+}
+```
+
+### 5. **Reference the Active Range**
+Get the range that is currently selected by the user.
+
+```javascript
+function getActiveRange() {
+  var range = SpreadsheetApp.getActiveSpreadsheet().getActiveRange();
+  Logger.log(range.getA1Notation());  // Logs the active range, e.g., 'A1:B2'
+}
+```
+
+### 6. **Reference a Specific Range by A1 Notation**
+You can reference a specific range by using A1 notation (e.g., 'A1:B10').
+
+```javascript
+function getRangeByA1() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B10');
+  Logger.log(range.getA1Notation());  // Logs 'A1:B10'
+}
+```
+
+### 7. **Reference a Range by Row and Column**
+You can reference a range by specifying the starting row, column, and optionally the number of rows and columns.
+
+```javascript
+function getRangeByRowCol() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange(1, 1, 10, 2);  // 10 rows and 2 columns starting at A1
+  Logger.log(range.getA1Notation());  // Logs 'A1:B10'
+}
+```
+
+### 8. **Reference a Named Range**
+If you have defined named ranges in your sheet, you can reference them by name.
+
+```javascript
+function getNamedRange() {
+  var range = SpreadsheetApp.getActiveSpreadsheet().getRangeByName('MyNamedRange');
+  Logger.log(range.getA1Notation());  // Logs the A1 notation of the named range
+}
+```
+
+### 9. **Reference the Last Row with Data**
+To get the last row of data in a sheet.
+
+```javascript
+function getLastRow() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var lastRow = sheet.getLastRow();
+  Logger.log(lastRow);  // Logs the number of the last row with content
+}
+```
+
+### 10. **Reference the Last Column with Data**
+Similarly, to get the last column with data.
+
+```javascript
+function getLastColumn() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var lastColumn = sheet.getLastColumn();
+  Logger.log(lastColumn);  // Logs the number of the last column with content
+}
+```
+
+### 11. **Reference and Set Values in a Range**
+You can reference a range and set values in it.
+
+```javascript
+function setRangeValues() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B2');
+  range.setValues([['Name', 'Age'], ['John', 30]]);  // Set values in the range
+}
+```
+
+### 12. **Reference a Range and Get Values**
+To retrieve values from a specific range.
+
+```javascript
+function getRangeValues() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B2');
+  var values = range.getValues();
+  Logger.log(values);  // Logs the values in the range
+}
+```
+
+### 13. **Reference a Specific Cell**
+To reference a specific cell, you can either use `getRange()` or `getActiveCell()`.
+
+```javascript
+function getSpecificCell() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var cell = sheet.getRange('A1');
+  Logger.log(cell.getValue());  // Logs the value of cell A1
+}
+```
+
+### 14. **Reference a Sheet and Add a New Sheet**
+You can also add new sheets to the spreadsheet.
+
+```javascript
+function addNewSheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var newSheet = spreadsheet.insertSheet('NewSheet');
+  Logger.log(newSheet.getName());  // Logs 'NewSheet'
+}
+```
+
+### 15. **Reference a Range and Clear Contents**
+Clear the contents of a specified range.
+
+```javascript
+function clearRangeContents() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B10');
+  range.clearContent();  // Clears the contents in the specified range
+}
+```
+
+### 16. **Reference a Filtered Range**
+If you are using filters in your sheet, you can reference the filtered range.
+
+```javascript
+function getFilteredRange() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var filter = sheet.getFilter();
+  if (filter) {
+    var range = filter.getRange();
+    Logger.log(range.getA1Notation());  // Logs the range of the filtered data
+  }
+}
+```
+
+### 17. **Reference a Protected Range**
+To access or protect certain ranges.
+
+```javascript
+function protectRange() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  var range = sheet.getRange('A1:B10');
+  var protection = range.protect();  // Protect the range
+  protection.setDescription('Protected Range');
+}
+```
+
+---
+
+These examples demonstrate different ways to reference a sheet or range within Google Sheets using Apps Script. Each example serves a specific purpose, from referencing a range by A1 notation to interacting with sheets programmatically.

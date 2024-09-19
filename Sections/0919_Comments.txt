@@ -1,0 +1,77 @@
+Adding comments in Google Apps Script is similar to commenting in other programming languages. Comments are used to explain and document the code, making it easier for others (and yourself) to understand its purpose and functionality. 
+
+Here’s how to add comments in Google Apps Script:
+
+### **1. Single-Line Comments**
+
+Single-line comments are used for brief explanations or notes. They start with `//` and continue to the end of the line.
+
+#### Example:
+```javascript
+function exampleFunction() {
+  // This is a single-line comment
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  Logger.log('Sheet name: ' + sheet.getName()); // Logs the sheet name
+}
+```
+
+### **2. Multi-Line Comments**
+
+Multi-line comments, also known as block comments, are used for longer explanations or to comment out multiple lines of code. They start with `/*` and end with `*/`.
+
+#### Example:
+```javascript
+function exampleFunction() {
+  /*
+    This is a multi-line comment.
+    It can span multiple lines and is useful for longer explanations.
+  */
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  Logger.log('Sheet name: ' + sheet.getName());
+}
+```
+
+### **3. Documenting Functions and Code**
+
+For documenting functions, it's a good practice to include comments explaining the function’s purpose, parameters, and return values.
+
+#### Example:
+```javascript
+/**
+ * This function retrieves and logs the name of the specified sheet.
+ * @param {string} sheetName - The name of the sheet to retrieve.
+ */
+function logSheetName(sheetName) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  
+  if (sheet) {
+    Logger.log('Sheet name: ' + sheet.getName());
+  } else {
+    Logger.log('Sheet not found: ' + sheetName);
+  }
+}
+```
+
+### **4. Commenting Out Code**
+
+You might want to temporarily disable some code for testing or debugging. You can comment out lines or blocks of code.
+
+#### Example:
+```javascript
+function exampleFunction() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  
+  // The following line is commented out for testing purposes
+  // Logger.log('Sheet name: ' + sheet.getName());
+  
+  // Other code here...
+}
+```
+
+### **Best Practices**
+
+- **Be Descriptive**: Comments should be clear and concise. Avoid stating the obvious. Instead of `// This adds 1 to x`, write `// Increment x by 1 to adjust for the offset`.
+- **Update Comments**: Keep comments up to date with code changes. Outdated comments can be misleading.
+- **Use JSDoc for Functions**: For functions and methods, use JSDoc style comments to provide details about parameters, return values, and function behavior. This is helpful for code documentation and IDE support.
+
+By using these commenting techniques, you can make your Google Apps Script code more readable and maintainable.
