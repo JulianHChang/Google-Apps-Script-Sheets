@@ -1,0 +1,170 @@
+Escape characters in Google Apps Script are used to include special characters within strings that would otherwise be interpreted differently. This is important for properly formatting strings, especially when dealing with characters like quotes, backslashes, or other special symbols. 
+
+Here’s an exhaustive guide to using escape characters in Apps Script:
+
+### **1. Basic Escape Characters**
+
+#### **1.1. Escaping Double Quotes**
+
+To include double quotes (`"`) within a string delimited by double quotes, use the backslash (`\`) to escape them.
+
+**Example:**
+```javascript
+function escapeDoubleQuotes() {
+  var stringWithQuotes = "She said, \"Hello, world!\"";
+  Logger.log(stringWithQuotes); // Logs: She said, "Hello, world!"
+}
+```
+
+#### **1.2. Escaping Single Quotes**
+
+In a string delimited by single quotes, escape single quotes (`'`) using a backslash.
+
+**Example:**
+```javascript
+function escapeSingleQuotes() {
+  var stringWithSingleQuote = 'It\'s a beautiful day!';
+  Logger.log(stringWithSingleQuote); // Logs: It's a beautiful day!
+}
+```
+
+#### **1.3. Escaping Backslashes**
+
+To include a backslash (`\`) in a string, use two backslashes (`\\`).
+
+**Example:**
+```javascript
+function escapeBackslash() {
+  var stringWithBackslash = "This is a backslash: \\";
+  Logger.log(stringWithBackslash); // Logs: This is a backslash: \
+}
+```
+
+### **2. Special Characters**
+
+#### **2.1. Newline Character**
+
+Use `\n` to insert a newline in a string.
+
+**Example:**
+```javascript
+function newlineCharacter() {
+  var multilineString = "Line 1\nLine 2\nLine 3";
+  Logger.log(multilineString); // Logs: Line 1\nLine 2\nLine 3 (multiline output)
+}
+```
+
+#### **2.2. Carriage Return**
+
+Use `\r` to insert a carriage return. It’s less common but can be used in combination with `\n` to format text.
+
+**Example:**
+```javascript
+function carriageReturn() {
+  var stringWithCarriageReturn = "First line\rSecond line";
+  Logger.log(stringWithCarriageReturn); // Logs: Second line (First line is overwritten)
+}
+```
+
+#### **2.3. Tab Character**
+
+Use `\t` to insert a tab.
+
+**Example:**
+```javascript
+function tabCharacter() {
+  var stringWithTab = "Column1\tColumn2\tColumn3";
+  Logger.log(stringWithTab); // Logs: Column1\tColumn2\tColumn3 (tab-separated values)
+}
+```
+
+### **3. Unicode Characters**
+
+You can use Unicode escape sequences to include special or non-printable characters in strings.
+
+#### **3.1. Unicode Escape Sequence**
+
+Use `\u` followed by the four-digit hexadecimal code of the Unicode character.
+
+**Example:**
+```javascript
+function unicodeCharacter() {
+  var unicodeString = "Here is a smiley face: \u263A";
+  Logger.log(unicodeString); // Logs: Here is a smiley face: ☺
+}
+```
+
+### **4. Template Literals (ES6)**
+
+In addition to traditional string literals, you can use template literals for more complex string formatting. Template literals use backticks (`` ` ``) and support embedded expressions and multi-line strings.
+
+#### **4.1. Multi-Line Strings**
+
+**Example:**
+```javascript
+function multiLineString() {
+  var multiLineString = `This is line 1
+This is line 2
+This is line 3`;
+  Logger.log(multiLineString); // Logs multi-line string
+}
+```
+
+#### **4.2. Embedded Expressions**
+
+You can embed expressions in template literals using `${}`.
+
+**Example:**
+```javascript
+function embeddedExpressions() {
+  var name = 'World';
+  var greeting = `Hello, ${name}!`;
+  Logger.log(greeting); // Logs: Hello, World!
+}
+```
+
+### **5. Practical Examples**
+
+#### **5.1. Constructing HTML with Escape Characters**
+
+When constructing HTML strings, escaping characters like quotes is important to ensure correct rendering.
+
+**Example:**
+```javascript
+function createHtmlString() {
+  var html = "<div class=\"container\">\n" +
+             "  <h1>Welcome!</h1>\n" +
+             "  <p>This is a paragraph.</p>\n" +
+             "</div>";
+  Logger.log(html);
+}
+```
+
+#### **5.2. Creating JSON Strings**
+
+When creating JSON strings, escape quotes and backslashes to ensure valid JSON format.
+
+**Example:**
+```javascript
+function createJsonString() {
+  var jsonString = "{\n" +
+                   "  \"name\": \"John Doe\",\n" +
+                   "  \"age\": 30,\n" +
+                   "  \"city\": \"New York\"\n" +
+                   "}";
+  Logger.log(jsonString); // Logs valid JSON string
+}
+```
+
+### **Summary of Escape Characters**
+
+- **Double Quote**: `\"`
+- **Single Quote**: `\'`
+- **Backslash**: `\\`
+- **Newline**: `\n`
+- **Carriage Return**: `\r`
+- **Tab**: `\t`
+- **Unicode**: `\uXXXX` (where `XXXX` is the Unicode code)
+- **Template Literals**: Use backticks (`` ` ``) for multi-line strings and embedded expressions.
+
+These examples should help you handle various scenarios involving escape characters in Google Apps Script.

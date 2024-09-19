@@ -1,0 +1,295 @@
+The `SpreadsheetApp` class in Google Apps Script provides methods and properties for interacting with Google Sheets. This class allows you to create, modify, and access Google Sheets programmatically. Below are the **most commonly used properties and methods** within the `SpreadsheetApp` class:
+
+### 1. **Active Spreadsheet and Sheets**
+
+#### 1.1 `getActiveSpreadsheet()`
+This method returns the currently active spreadsheet where the script is running.
+
+```javascript
+function getActiveSpreadsheetExample() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(spreadsheet.getName());  // Logs the name of the active spreadsheet
+}
+```
+
+#### 1.2 `getActiveSheet()`
+Returns the active sheet within the active spreadsheet.
+
+```javascript
+function getActiveSheetExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  Logger.log(sheet.getName());  // Logs the name of the active sheet
+}
+```
+
+#### 1.3 `getActiveRange()`
+Returns the active range (the currently selected cells) in the active sheet.
+
+```javascript
+function getActiveRangeExample() {
+  var range = SpreadsheetApp.getActiveSpreadsheet().getActiveRange();
+  Logger.log(range.getA1Notation());  // Logs the active range in A1 notation
+}
+```
+
+#### 1.4 `getActiveCell()`
+Returns the active cell in the active sheet.
+
+```javascript
+function getActiveCellExample() {
+  var cell = SpreadsheetApp.getActiveSpreadsheet().getActiveCell();
+  Logger.log(cell.getA1Notation());  // Logs the A1 notation of the active cell
+}
+```
+
+---
+
+### 2. **Creating and Opening Spreadsheets**
+
+#### 2.1 `create()`
+Creates a new spreadsheet with a given name.
+
+```javascript
+function createSpreadsheetExample() {
+  var spreadsheet = SpreadsheetApp.create("New Spreadsheet");
+  Logger.log(spreadsheet.getUrl());  // Logs the URL of the newly created spreadsheet
+}
+```
+
+#### 2.2 `openById()`
+Opens a spreadsheet by its unique ID (the part of the URL after `/d/`).
+
+```javascript
+function openSpreadsheetByIdExample() {
+  var spreadsheetId = "your-spreadsheet-id";
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  Logger.log(spreadsheet.getName());  // Logs the name of the spreadsheet
+}
+```
+
+#### 2.3 `openByUrl()`
+Opens a spreadsheet by its URL.
+
+```javascript
+function openSpreadsheetByUrlExample() {
+  var url = "https://docs.google.com/spreadsheets/d/your-spreadsheet-id/edit";
+  var spreadsheet = SpreadsheetApp.openByUrl(url);
+  Logger.log(spreadsheet.getName());  // Logs the name of the spreadsheet
+}
+```
+
+---
+
+### 3. **Accessing Sheets**
+
+#### 3.1 `getSheets()`
+Returns an array of all the sheets in the spreadsheet.
+
+```javascript
+function getAllSheetsExample() {
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  for (var i = 0; i < sheets.length; i++) {
+    Logger.log(sheets[i].getName());  // Logs the name of each sheet in the spreadsheet
+  }
+}
+```
+
+#### 3.2 `getSheetByName()`
+Returns a specific sheet by its name.
+
+```javascript
+function getSheetByNameExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+  Logger.log(sheet.getName());  // Logs the name of the sheet
+}
+```
+
+#### 3.3 `insertSheet()`
+Creates and inserts a new sheet in the active spreadsheet.
+
+```javascript
+function insertNewSheetExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet("New Sheet");
+  Logger.log(sheet.getName());  // Logs the name of the newly created sheet
+}
+```
+
+#### 3.4 `deleteSheet()`
+Deletes a specific sheet from the spreadsheet.
+
+```javascript
+function deleteSheetExample() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName("Sheet1");
+  spreadsheet.deleteSheet(sheet);  // Deletes the sheet named "Sheet1"
+}
+```
+
+---
+
+### 4. **Working with Ranges and Cells**
+
+#### 4.1 `getRange()`
+Returns a range of cells from a sheet.
+
+```javascript
+function getRangeExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var range = sheet.getRange("A1:B2");  // Gets the range A1 to B2
+  Logger.log(range.getA1Notation());    // Logs "A1:B2"
+}
+```
+
+#### 4.2 `getDataRange()`
+Returns the range containing all the data in the sheet.
+
+```javascript
+function getDataRangeExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var range = sheet.getDataRange();  // Gets the range that contains all the data
+  Logger.log(range.getA1Notation()); // Logs the range in A1 notation
+}
+```
+
+#### 4.3 `getValues()`
+Returns a 2D array of values from a range of cells.
+
+```javascript
+function getValuesExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var range = sheet.getRange("A1:B2");
+  var values = range.getValues();  // Gets the values in the range A1:B2
+  Logger.log(values);
+}
+```
+
+---
+
+### 5. **Formatting and Setting Data**
+
+#### 5.1 `setValue()` and `setValues()`
+These methods set values in a single cell or a range of cells, respectively.
+
+```javascript
+function setSingleValueExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.getRange("A1").setValue("Hello World");  // Sets "Hello World" in cell A1
+}
+
+function setMultipleValuesExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var values = [
+    ["Name", "Age"],
+    ["Alice", 25],
+    ["Bob", 30]
+  ];
+  sheet.getRange("A1:B3").setValues(values);  // Sets the values in the range A1:B3
+}
+```
+
+#### 5.2 `setBackground()`
+Sets the background color for a cell or range of cells.
+
+```javascript
+function setBackgroundExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.getRange("A1:B2").setBackground("yellow");  // Sets the background color to yellow
+}
+```
+
+---
+
+### 6. **Spreadsheet Properties**
+
+#### 6.1 `getId()`
+Returns the unique ID of the active spreadsheet.
+
+```javascript
+function getSpreadsheetIdExample() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(spreadsheet.getId());  // Logs the spreadsheet's unique ID
+}
+```
+
+#### 6.2 `getName()`
+Returns the name of the active spreadsheet.
+
+```javascript
+function getSpreadsheetNameExample() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(spreadsheet.getName());  // Logs the name of the spreadsheet
+}
+```
+
+#### 6.3 `getUrl()`
+Returns the URL of the active spreadsheet.
+
+```javascript
+function getSpreadsheetUrlExample() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(spreadsheet.getUrl());  // Logs the URL of the spreadsheet
+}
+```
+
+---
+
+### 7. **Triggers**
+
+#### 7.1 `getActiveSpreadsheet().getOnEdit()`
+Executes code when a user edits the sheet. You can set an `onEdit()` trigger manually or programmatically.
+
+```javascript
+function onEdit(e) {
+  var sheet = e.source.getActiveSheet();
+  var range = e.range;
+  Logger.log("Cell edited: " + range.getA1Notation());
+}
+```
+
+---
+
+### 8. **Utilities and Other Methods**
+
+#### 8.1 `flush()`
+Flushes all pending changes to the spreadsheet. This is useful when you want to ensure that all operations (like data changes, formatting, etc.) are applied before continuing.
+
+```javascript
+function flushExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.getRange("A1").setValue("Flushed!");
+  SpreadsheetApp.flush();  // Ensures all changes are applied before continuing
+}
+```
+
+#### 8.2 `copy()`
+Copies the content from one range to another range.
+
+```javascript
+function copyRangeExample() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var sourceRange = sheet.getRange("A1:B2");
+  var targetRange = sheet.getRange("D1:E2");
+  sourceRange.copyTo(targetRange);
+}
+```
+
+---
+
+### Summary of Commonly Used Properties and Methods in `SpreadsheetApp` Class
+
+- **Accessing Spreadsheets and Sheets:**
+  - `getActiveSpreadsheet()`, `getActiveSheet()`, `openById()`, `openByUrl()`
+  
+- **Manipulating Sheets:**
+  - `getSheetByName()`, `insertSheet()`, `deleteSheet()`
+
+- **Working with Ranges:**
+  - `getRange()`, `getDataRange()`, `getValues()`, `setValue()`, `setValues()`, `setBackground()`
+
+- **Spreadsheet Properties:**
+  - `getName()`, `getId()`, `getUrl()`
+
+- **Utilities:**
+  - `flush()`, `copy()`
+
+These methods cover a wide range of functionality for automating Google Sheets

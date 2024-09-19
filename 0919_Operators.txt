@@ -1,0 +1,274 @@
+Operators in Google Apps Script, like in JavaScript, allow you to perform different operations on variables and values. Operators are used in arithmetic, logical comparisons, assignments, and more.
+
+Here's an **exhaustive overview of operators** in Google Apps Script, along with examples for each category:
+
+### 1. **Arithmetic Operators**
+Used to perform basic mathematical operations.
+
+| Operator  | Description                 |
+| --------- | --------------------------- |
+| `+`       | Addition                    |
+| `-`       | Subtraction                 |
+| `*`       | Multiplication              |
+| `/`       | Division                    |
+| `%`       | Modulus (remainder)         |
+| `++`      | Increment                   |
+| `--`      | Decrement                   |
+
+#### Example 1.1: Arithmetic Operations
+```javascript
+function arithmeticExample() {
+  var a = 10;
+  var b = 5;
+  
+  Logger.log(a + b);  // Logs: 15
+  Logger.log(a - b);  // Logs: 5
+  Logger.log(a * b);  // Logs: 50
+  Logger.log(a / b);  // Logs: 2
+  Logger.log(a % b);  // Logs: 0 (remainder of division)
+  
+  a++;  // Increment a by 1
+  Logger.log(a);  // Logs: 11
+  
+  b--;  // Decrement b by 1
+  Logger.log(b);  // Logs: 4
+}
+```
+
+---
+
+### 2. **Assignment Operators**
+Used to assign values to variables.
+
+| Operator  | Description                          |
+| --------- | ------------------------------------ |
+| `=`       | Assignment                          |
+| `+=`      | Addition assignment                  |
+| `-=`      | Subtraction assignment               |
+| `*=`      | Multiplication assignment            |
+| `/=`      | Division assignment                  |
+| `%=`      | Modulus assignment                   |
+
+#### Example 2.1: Assignment Operations
+```javascript
+function assignmentExample() {
+  var a = 10;
+  var b = 5;
+  
+  a += 5;  // Equivalent to: a = a + 5
+  Logger.log(a);  // Logs: 15
+  
+  b *= 2;  // Equivalent to: b = b * 2
+  Logger.log(b);  // Logs: 10
+}
+```
+
+---
+
+### 3. **Comparison Operators**
+Used to compare values and return a Boolean (`true` or `false`).
+
+| Operator  | Description                 |
+| --------- | --------------------------- |
+| `==`      | Equal to                    |
+| `===`     | Strict equal (value and type)|
+| `!=`      | Not equal                   |
+| `!==`     | Strict not equal            |
+| `>`       | Greater than                |
+| `<`       | Less than                   |
+| `>=`      | Greater than or equal to    |
+| `<=`      | Less than or equal to       |
+
+#### Example 3.1: Comparison Operations
+```javascript
+function comparisonExample() {
+  var a = 10;
+  var b = "10";
+  var c = 5;
+  
+  Logger.log(a == b);   // Logs: true (loose comparison, type is ignored)
+  Logger.log(a === b);  // Logs: false (strict comparison, type matters)
+  
+  Logger.log(a != c);   // Logs: true
+  Logger.log(a !== b);  // Logs: true (different type)
+  
+  Logger.log(a > c);    // Logs: true
+  Logger.log(a <= c);   // Logs: false
+}
+```
+
+---
+
+### 4. **Logical Operators**
+Used to perform logical operations and return a Boolean result.
+
+| Operator  | Description                 |
+| --------- | --------------------------- |
+| `&&`      | Logical AND                 |
+| `||`      | Logical OR                  |
+| `!`       | Logical NOT                 |
+
+#### Example 4.1: Logical Operations
+```javascript
+function logicalExample() {
+  var isAdult = true;
+  var hasTicket = false;
+  
+  Logger.log(isAdult && hasTicket);  // Logs: false (AND requires both true)
+  Logger.log(isAdult || hasTicket);  // Logs: true (OR requires one true)
+  Logger.log(!isAdult);              // Logs: false (NOT inverts the boolean)
+}
+```
+
+---
+
+### 5. **Bitwise Operators**
+These work at the binary level and perform bitwise operations on numbers.
+
+| Operator  | Description                 |
+| --------- | --------------------------- |
+| `&`       | Bitwise AND                 |
+| `|`       | Bitwise OR                  |
+| `^`       | Bitwise XOR (exclusive OR)  |
+| `~`       | Bitwise NOT                 |
+| `<<`      | Left shift                  |
+| `>>`      | Right shift                 |
+| `>>>`     | Zero-fill right shift       |
+
+#### Example 5.1: Bitwise Operations
+```javascript
+function bitwiseExample() {
+  var a = 5;   // 0101 in binary
+  var b = 3;   // 0011 in binary
+  
+  Logger.log(a & b);  // Logs: 1  (0101 & 0011 = 0001)
+  Logger.log(a | b);  // Logs: 7  (0101 | 0011 = 0111)
+  Logger.log(a ^ b);  // Logs: 6  (0101 ^ 0011 = 0110)
+  Logger.log(~a);     // Logs: -6 (bitwise NOT inverts the bits)
+}
+```
+
+---
+
+### 6. **Ternary Operator**
+A shorthand for `if-else` statements. The syntax is `condition ? valueIfTrue : valueIfFalse`.
+
+#### Example 6.1: Ternary Operation
+```javascript
+function ternaryExample() {
+  var age = 18;
+  var canVote = (age >= 18) ? "Yes" : "No";
+  
+  Logger.log(canVote);  // Logs: Yes
+}
+```
+
+---
+
+### 7. **Type Operators**
+Used to identify the type of a variable.
+
+| Operator  | Description                  |
+| --------- | ---------------------------- |
+| `typeof`  | Returns the type of a variable|
+| `instanceof` | Tests if an object is an instance of a constructor |
+
+#### Example 7.1: Using `typeof`
+```javascript
+function typeofExample() {
+  var name = "Alice";
+  var age = 30;
+  var isStudent = false;
+  
+  Logger.log(typeof name);      // Logs: string
+  Logger.log(typeof age);       // Logs: number
+  Logger.log(typeof isStudent); // Logs: boolean
+}
+```
+
+#### Example 7.2: Using `instanceof`
+```javascript
+function instanceofExample() {
+  var today = new Date();
+  
+  Logger.log(today instanceof Date);  // Logs: true
+}
+```
+
+---
+
+### 8. **String Operators**
+Strings can also be concatenated using the `+` operator.
+
+#### Example 8.1: String Concatenation
+```javascript
+function stringConcatenationExample() {
+  var firstName = "John";
+  var lastName = "Doe";
+  
+  var fullName = firstName + " " + lastName;
+  Logger.log(fullName);  // Logs: John Doe
+}
+```
+
+---
+
+### 9. **Comma Operator**
+Used to evaluate multiple expressions, returning the value of the last one.
+
+#### Example 9.1: Using the Comma Operator
+```javascript
+function commaOperatorExample() {
+  var a = (1, 2, 3);  // a gets the value of the last expression (3)
+  
+  Logger.log(a);  // Logs: 3
+}
+```
+
+---
+
+### 10. **Nullish Coalescing Operator (`??`)**
+Returns the right-hand operand when the left-hand operand is `null` or `undefined`.
+
+#### Example 10.1: Nullish Coalescing
+```javascript
+function nullishCoalescingExample() {
+  var a = null;
+  var b = "Default";
+  
+  var result = a ?? b;  // If 'a' is null or undefined, use 'b'
+  Logger.log(result);   // Logs: Default
+}
+```
+
+---
+
+### 11. **Optional Chaining Operator (`?.`)**
+Allows safe access to properties or methods of an object that might be `null` or `undefined`.
+
+#### Example 11.1: Optional Chaining
+```javascript
+function optionalChainingExample() {
+  var person = {
+    name: "Alice",
+    address: {
+      city: "New York"
+    }
+  };
+  
+  Logger.log(person?.address?.city);  // Logs: New York
+  Logger.log(person?.job?.title);     // Logs: undefined (safe access, no error)
+}
+```
+
+---
+
+### Summary of Operators in Apps Script:
+
+- **Arithmetic Operators**: `+`, `-`, `*`, `/`, `%`, `++`, `--`
+- **Assignment Operators**: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
+- **Comparison Operators**: `==`, `===`, `!=`, `!==`, `>`, `<`, `>=`, `<=`
+- **Logical Operators**: `&&`, `||`, `!`
+- **Bitwise Operators**: `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>`
+- **Ternary Operator**: `condition ? expr1 : expr2`
+- **Type Operators**: `typeof

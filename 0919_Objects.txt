@@ -1,0 +1,388 @@
+In Google Apps Script, objects are a crucial part of working with data. They are used to store collections of data, and they can have properties and methods. In Apps Script (and JavaScript in general), objects are key-value pairs where keys are strings and values can be of any type (including other objects, functions, arrays, etc.).
+
+### Basic Concept of Objects in Apps Script
+An object is a collection of related data or functionality, consisting of properties (data) and methods (functions).
+
+Here’s an exhaustive list of examples and explanations for working with objects in Apps Script:
+
+---
+
+### 1. **Creating an Object**
+
+You can create an object using object literal notation, where key-value pairs are defined inside curly braces `{}`.
+
+#### Example 1.1: Basic Object Creation
+
+```javascript
+function createBasicObject() {
+  var person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+  };
+  
+  Logger.log(person);  // Logs {name: "John", age: 30, city: "New York"}
+}
+```
+
+---
+
+### 2. **Accessing Object Properties**
+
+You can access the properties of an object using either **dot notation** or **bracket notation**.
+
+#### Example 2.1: Accessing Properties with Dot Notation
+
+```javascript
+function accessObjectDotNotation() {
+  var car = {
+    make: "Toyota",
+    model: "Corolla",
+    year: 2019
+  };
+  
+  Logger.log("Car make: " + car.make);  // Logs "Car make: Toyota"
+  Logger.log("Car model: " + car.model);  // Logs "Car model: Corolla"
+}
+```
+
+#### Example 2.2: Accessing Properties with Bracket Notation
+
+```javascript
+function accessObjectBracketNotation() {
+  var car = {
+    make: "Toyota",
+    model: "Corolla",
+    year: 2019
+  };
+  
+  Logger.log("Car make: " + car['make']);  // Logs "Car make: Toyota"
+  Logger.log("Car year: " + car['year']);  // Logs "Car year: 2019"
+}
+```
+
+> **Note**: Bracket notation is useful when the property name is dynamic or contains special characters.
+
+---
+
+### 3. **Adding or Modifying Object Properties**
+
+You can add or modify properties of an object even after it’s created.
+
+#### Example 3.1: Modifying Existing Properties
+
+```javascript
+function modifyObjectProperties() {
+  var person = {
+    name: "John",
+    age: 30
+  };
+  
+  person.age = 35;  // Modifying the age property
+  person.city = "New York";  // Adding a new property
+  
+  Logger.log(person);  // Logs {name: "John", age: 35, city: "New York"}
+}
+```
+
+---
+
+### 4. **Deleting Object Properties**
+
+You can use the `delete` keyword to remove a property from an object.
+
+#### Example 4.1: Deleting a Property
+
+```javascript
+function deleteObjectProperty() {
+  var person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+  };
+  
+  delete person.city;  // Removing the 'city' property
+  
+  Logger.log(person);  // Logs {name: "John", age: 30}
+}
+```
+
+---
+
+### 5. **Checking for Property Existence**
+
+You can check whether a property exists in an object using the `in` operator or `hasOwnProperty()` method.
+
+#### Example 5.1: Using the `in` Operator
+
+```javascript
+function checkPropertyInOperator() {
+  var person = {
+    name: "John",
+    age: 30
+  };
+  
+  if ('age' in person) {
+    Logger.log("Age property exists");
+  }
+  
+  if (!('city' in person)) {
+    Logger.log("City property does not exist");
+  }
+}
+```
+
+#### Example 5.2: Using the `hasOwnProperty()` Method
+
+```javascript
+function checkPropertyHasOwnProperty() {
+  var person = {
+    name: "John",
+    age: 30
+  };
+  
+  if (person.hasOwnProperty('name')) {
+    Logger.log("Name property exists");
+  }
+  
+  if (!person.hasOwnProperty('city')) {
+    Logger.log("City property does not exist");
+  }
+}
+```
+
+---
+
+### 6. **Iterating Over Object Properties**
+
+You can iterate over an object’s properties using a `for...in` loop.
+
+#### Example 6.1: Iterating Over Properties
+
+```javascript
+function iterateOverObject() {
+  var person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+  };
+  
+  for (var key in person) {
+    if (person.hasOwnProperty(key)) {
+      Logger.log(key + ": " + person[key]);
+    }
+  }
+}
+```
+
+---
+
+### 7. **Object Methods (Functions as Object Properties)**
+
+An object can have methods, which are functions stored as properties.
+
+#### Example 7.1: Defining Methods in an Object
+
+```javascript
+function objectWithMethods() {
+  var person = {
+    name: "John",
+    age: 30,
+    greet: function() {
+      return "Hello, my name is " + this.name;
+    }
+  };
+  
+  Logger.log(person.greet());  // Logs "Hello, my name is John"
+}
+```
+
+#### Example 7.2: Using `this` Keyword
+
+The `this` keyword refers to the current object inside a method.
+
+```javascript
+function objectWithThisKeyword() {
+  var car = {
+    make: "Toyota",
+    model: "Corolla",
+    displayDetails: function() {
+      return "Car: " + this.make + " " + this.model;
+    }
+  };
+  
+  Logger.log(car.displayDetails());  // Logs "Car: Toyota Corolla"
+}
+```
+
+---
+
+### 8. **Nested Objects**
+
+Objects can contain other objects as values, creating a nested structure.
+
+#### Example 8.1: Creating a Nested Object
+
+```javascript
+function nestedObjectExample() {
+  var person = {
+    name: "John",
+    age: 30,
+    address: {
+      street: "123 Main St",
+      city: "New York",
+      zip: "10001"
+    }
+  };
+  
+  Logger.log("City: " + person.address.city);  // Logs "City: New York"
+}
+```
+
+---
+
+### 9. **Object Constructor Functions**
+
+You can use constructor functions to create multiple objects with the same structure. Constructor functions are like blueprints for objects.
+
+#### Example 9.1: Using a Constructor Function
+
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.greet = function() {
+    return "Hi, I'm " + this.name + " and I'm " + this.age + " years old.";
+  };
+}
+
+function objectConstructorExample() {
+  var person1 = new Person("Alice", 25);
+  var person2 = new Person("Bob", 30);
+  
+  Logger.log(person1.greet());  // Logs "Hi, I'm Alice and I'm 25 years old."
+  Logger.log(person2.greet());  // Logs "Hi, I'm Bob and I'm 30 years old."
+}
+```
+
+---
+
+### 10. **`Object` Methods for Manipulating Objects**
+
+JavaScript (and by extension, Google Apps Script) provides several built-in methods for working with objects.
+
+#### Example 10.1: `Object.keys()`
+
+This method returns an array of an object's keys.
+
+```javascript
+function objectKeysExample() {
+  var person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+  };
+  
+  var keys = Object.keys(person);
+  Logger.log(keys);  // Logs ["name", "age", "city"]
+}
+```
+
+#### Example 10.2: `Object.values()`
+
+This method returns an array of an object's values.
+
+```javascript
+function objectValuesExample() {
+  var person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+  };
+  
+  var values = Object.values(person);
+  Logger.log(values);  // Logs ["John", 30, "New York"]
+}
+```
+
+#### Example 10.3: `Object.entries()`
+
+This method returns an array of key-value pairs (as arrays).
+
+```javascript
+function objectEntriesExample() {
+  var person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+  };
+  
+  var entries = Object.entries(person);
+  Logger.log(entries);  // Logs [["name", "John"], ["age", 30], ["city", "New York"]]
+}
+```
+
+#### Example 10.4: `Object.assign()`
+
+This method copies properties from one or more source objects to a target object.
+
+```javascript
+function objectAssignExample() {
+  var target = {name: "John"};
+  var source = {age: 30, city: "New York"};
+  
+  Object.assign(target, source);
+  
+  Logger.log(target);  // Logs {name: "John", age: 30, city: "New York"}
+}
+```
+
+---
+
+### 11. **Cloning Objects**
+
+Objects in JavaScript are passed by reference, so changes to one object can affect another if they reference the same data. You can clone objects to avoid this.
+
+#### Example 11.1: Shallow Copy Using `Object.assign()`
+
+```javascript
+function shallowCopyExample() {
+  var original = {name: "John",
+
+ age: 30};
+  var clone = Object.assign({}, original);
+  
+  clone.age = 35;
+  
+  Logger.log(original.age);  // Logs 30 (not affected)
+  Logger.log(clone.age);     // Logs 35
+}
+```
+
+#### Example 11.2: Deep Copy Using JSON Methods
+
+```javascript
+function deepCopyExample() {
+  var original = {name: "John", age: 30, address: {city: "New York"}};
+  var clone = JSON.parse(JSON.stringify(original));
+  
+  clone.address.city = "Los Angeles";
+  
+  Logger.log(original.address.city);  // Logs "New York" (not affected)
+  Logger.log(clone.address.city);     // Logs "Los Angeles"
+}
+```
+
+---
+
+### Summary of Object Concepts in Apps Script:
+- **Basic object creation**: Define objects with properties and values.
+- **Accessing properties**: Use dot or bracket notation.
+- **Modifying properties**: Add, update, or delete properties.
+- **Methods in objects**: Functions can be properties of objects.
+- **Nested objects**: Objects can contain other objects.
+- **Object manipulation methods**: JavaScript provides built-in methods to handle objects like `Object.keys()`, `Object.values()`, `Object.assign()`.
+- **Constructor functions**: Blueprint-like functions for creating similar objects.
+- **Cloning**: Shallow or deep cloning to create copies of objects without references to the original.
+
+These examples should cover almost every scenario for working with objects in Google Apps Script.
